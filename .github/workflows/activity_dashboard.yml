@@ -36,19 +36,24 @@ jobs:
         uses: actions/configure-pages@v4
         
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: './dashboard'
+          if-no-files-found: error
+          retention-days: 30
+          
+      - name: Upload Reports artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: activity-reports
+          path: './reports'
+          if-no-files-found: warn
           
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
         
       - name: Commit and push updated reports
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add dashboard/
-          git add reports/
-          git commit -m "Update activity dashboard (automated)" || echo "No changes to commit"
-          git push
+        run: |*
+
