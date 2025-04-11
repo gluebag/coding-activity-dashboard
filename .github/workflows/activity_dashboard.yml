@@ -55,5 +55,4 @@ jobs:
         uses: actions/deploy-pages@v3
         
       - name: Commit and push updated reports
-        run: |*
-
+        run: |
